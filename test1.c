@@ -21,11 +21,13 @@ int main()
 	i = 0;
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
+	//free(line); <- causes crashes, need to figure out why with lldb
 	fd = open("testfile.txt", O_RDONLY);
 	while (i < 5)
 	{
 		get_next_line(fd, &line);
 		ft_putendl(line);
+		//free(line); <- same situation
 		i++;
 	}
 	return (0);

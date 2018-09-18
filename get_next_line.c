@@ -68,7 +68,6 @@ char		*fill_return(int start_pos, int length, char buffer[])
 		i++;
 		z++;
 	}
-	//this causes an off-by one error, need to think of a better way to communicate to main funtion that we haven't found a \n
 	return (result);
 }
 
@@ -83,7 +82,7 @@ int			get_length_till_newline(char buf[], int start)
 			return (start - i + 1);
 		start++;
 	}
-	return (BUFF_SIZE);
+	return (-1);
 }
 
 void		copy_buffer(char dest[BUFF_SIZE], char source[BUFF_SIZE])
@@ -104,35 +103,39 @@ int			get_next_line(const int fd, char **line)
 	static int		current_line = 0;
 	static int		last_len = 0;
 	int				start = 0;
-	char			*result;
 	int				newline;
 	int				length;
 	char			buffer[BUFF_SIZE];
 
 	newline = 0;
-	result = ft_strnew(1);
-	while (read(fd, &buffer, BUFF_SIZE) > 0)
+	if (*line)
+		ft_strdel(line);
+	*line = ft_strnew(1);
+	while (read(fd, &buffer, BUFF_SIZE) > 0 && newline != 1)
 	{
 		if (current_line > 0 && newline == 0)
-			result = fill_return(last_len, BUFF_SIZE - last_len, last_buffer);
+			*line = fill_return(last_len, BUFF_SIZE - last_len, last_buffer);
+		newline = 2;
 		length = get_length_till_newline(buffer, start);
-		result = unsf_strjoin(result, fill_return(0, length - 1, buffer));
-		start += length;
-		if (length > 0 && length != BUFF_SIZE)
+		if (length == -1)
 		{
+			*line = unsf_strjoin(*line, fill_return(0, BUFF_SIZE, buffer));
+			start += BUFF_SIZE;
+		}
+		else if (length > 0)
+		{
+			*line = unsf_strjoin(*line, fill_return(0, length - 1, buffer));
 			newline = 1;
 			last_len = length;
 			copy_buffer(last_buffer, buffer);
-			break;
 		}
-		newline = 2;
+		else if (length == 0)
+		{
+			ft_putendl("empty line");
+		}
 	}
 	if (newline != 1)
 		return (-1);
 	current_line++;
-	if (*line != NULL)
-		free(*line);
-	*line = result;
-	//free(result);
 	return (1);
 }
