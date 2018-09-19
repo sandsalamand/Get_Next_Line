@@ -6,13 +6,13 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/18 01:08:00 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/19 01:41:50 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t		uns_strlen(const char *str)
+size_t		unsf_strlen(const char *str)
 {
 	int i;
 
@@ -31,8 +31,8 @@ char	*unsf_strjoin(char const *s1, char const *s2)
 	size_t		str2len;
 	size_t		i;
 
-	str1len = uns_strlen(s1);
-	str2len = uns_strlen(s2);
+	str1len = unsf_strlen(s1);
+	str2len = unsf_strlen(s2);
 	result = (char*)malloc(sizeof(char) * (str1len + str2len + 1));
 	if (result == NULL)
 		return (NULL);
@@ -48,6 +48,7 @@ char	*unsf_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	result[i] = '\0';
+	//should probably free the two strings here, will save that for when there are less major bugs to fix
 	return (result);
 }
 
@@ -76,11 +77,28 @@ int			get_length_till_newline(char buf[], int start)
 	int i;
 
 	i = start;
-	while (start < i + BUFF_SIZE)
+	while (i < BUFF_SIZE)
 	{
-		if (buf[start] == '\n' || buf[start] == 26)
-			return (start - i + 1);
-		start++;
+		if (buf[i] == '\n' || buf[i] == 26)
+			return(i - start + 1);
+		i++;
+	}
+	return (-1);
+}
+
+int			buff_revsearch(char buff[BUFF_SIZE], char c)
+{
+	int	strlen;
+	int i;
+	
+	i = 0;
+	strlen = BUFF_SIZE - 1;
+	while (strlen >= 0)
+	{
+		if (buff[strlen] == c)
+			return (i);
+		i++;
+		strlen--;
 	}
 	return (-1);
 }
@@ -102,7 +120,6 @@ int			get_next_line(const int fd, char **line)
 	static char		last_buffer[BUFF_SIZE];
 	static int		current_line = 0;
 	static int		last_len = 0;
-	int				start = 0;
 	int				newline;
 	int				length;
 	char			buffer[BUFF_SIZE];
@@ -114,20 +131,30 @@ int			get_next_line(const int fd, char **line)
 	while (read(fd, &buffer, BUFF_SIZE) > 0 && newline != 1)
 	{
 		if (current_line > 0 && newline == 0)
-			*line = fill_return(last_len, BUFF_SIZE - last_len, last_buffer);
-		newline = 2;
-		length = get_length_till_newline(buffer, start);
-		if (length == -1)
 		{
-			*line = unsf_strjoin(*line, fill_return(0, BUFF_SIZE, buffer));
-			start += BUFF_SIZE;
+			length = buff_revsearch(last_buffer, '\n');
+			if (BUFF_SIZE - length != last_len)
+			{
+				//need to be able to differentiate here if there's like 5 newlines in one buffer, need a better method
+				//might just rewrite the whole thing to be more robust and need less if statements
+				if (get_length_till_newline(last_buffer, last_len) != BUFF_SIZE - length)
+				{
+					*line = fill_return(last_len, get_length_till_newline(last_buffer, last_len), last_buffer);
+					break;
+				}
+			}
 		}
+		newline = 2;
+		length = get_length_till_newline(buffer, 0);
+		if (length == -1)
+			*line = unsf_strjoin(*line, fill_return(0, BUFF_SIZE, buffer));
 		else if (length > 0)
 		{
 			*line = unsf_strjoin(*line, fill_return(0, length - 1, buffer));
-			newline = 1;
 			last_len = length;
+			newline = 1;
 			copy_buffer(last_buffer, buffer);
+			break;
 		}
 		else if (length == 0)
 		{
