@@ -98,5 +98,6 @@ char				**ft_map_2d_char_array(char **array, char (*f)(char));
 char				**ft_2d_char_array(unsigned int width, unsigned int height,
 					char filler);
 void				**ft_fuck_lists(t_list *lelist);
+void				putnbr_endl(int nb);
 
 #endif

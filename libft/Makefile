@@ -76,6 +76,7 @@ SRC = ft_atoi.c \
 	  ft_2d_char_array.c \
 	  ft_map_2d_int_array.c \
 	  ft_map_2d_char_array.c \
+	  putnbr_endl.c \
 
 OBJ = $(SRC:.c=.o)
 

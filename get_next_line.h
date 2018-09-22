@@ -20,8 +20,7 @@
 
 # define BUFF_SIZE 32
 
-char	*fill_return(int start, int length, char buffer[]);
-int		get_length_till_newline(char buf[], int start);
+int		getstr(int strt, int end, char buf[BUFF_SIZE], char **line);
 int		get_next_line(const int fd, char **line);
 
 #endif
