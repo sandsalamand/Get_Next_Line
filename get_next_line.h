@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:38:01 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/18 00:27:51 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/23 00:39:33 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 
 # define BUFF_SIZE 32
 
-int		getstr(int strt, int end, char buf[BUFF_SIZE], char **line);
 int		get_next_line(const int fd, char **line);
 
 #endif
