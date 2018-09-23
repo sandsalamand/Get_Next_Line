@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/23 00:28:40 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/23 00:34:36 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int		get_next_line(const int fd, char **line)
 	cntr = 0;
 	while (act_buf[cur_byte - (PREV_LINES)])
 	{
+		buf[cntr] = act_buf[cur_byte - (PREV_LINES)];
 		if (act_buf[cur_byte - (PREV_LINES)] == '\n')
 		{
+			buf[cntr] = '\0';
 			*line = ft_strjoin(*line, buf);
 			free(buf);
 			cur_byte++;
@@ -45,15 +47,18 @@ int		get_next_line(const int fd, char **line)
 			ft_strclr(buf);
 			line_ct++;
 			cntr = 0;
+			cur_byte++;
 			if (read(fd, &act_buf, BUFF_SIZE) == 0)
 			{
 				free(buf);
 				return (0);
 			}
 		}
-		buf[cntr] = act_buf[cur_byte - (PREV_LINES)];
-		cntr++;
-		cur_byte++;
+		else
+		{
+			cntr++;
+			cur_byte++;
+		}
 	}
 	return (0);
 }

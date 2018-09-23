@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 01:47:04 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/17 21:03:44 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/23 00:36:01 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main()
 	line[0] = 'E';
 	//free(line); <- causes crashes, need to figure out why with lldb
 	fd = open("testfile.txt", O_RDONLY);
-	while (i < 5)
+	while (i < 7)
 	{
 		get_next_line(fd, &line);
 		ft_putendl(line);
