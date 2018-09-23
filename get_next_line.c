@@ -25,8 +25,8 @@ int		get_next_line(const int fd, char **line)
 	*line = ft_strnew(1);
 	if (cur_byte == 0)
 	{
-		if (read(fd, &act_buf, BUFF_SIZE) == 0)
-			return (0);
+		if (read(fd, &act_buf, BUFF_SIZE) < 0)
+			return (-1);
 	}
 	buf = ft_strnew((BUFF_SIZE * (line_ct + 1)) - 1);
 	cntr = 0;
@@ -39,7 +39,7 @@ int		get_next_line(const int fd, char **line)
 			*line = ft_strjoin(*line, buf);
 			free(buf);
 			cur_byte++;
-			return(0);
+			return(1);
 		}
 		if (cur_byte - (PREV_LINES) >= BUFF_SIZE - 1)
 		{
