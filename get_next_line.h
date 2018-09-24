@@ -17,8 +17,17 @@
 # include <fcntl.h>
 # include <sys/types.h>
 # include <sys/uio.h>
+#include <stdio.h>
 
 # define BUFF_SIZE 32
+
+typedef struct		s_vars
+{		
+	int				cur_byte;
+	int				line_ct;
+	char			act_buf[BUFF_SIZE];
+//	int				ctr;
+}					t_vars;
 
 int		get_next_line(const int fd, char **line);
 
