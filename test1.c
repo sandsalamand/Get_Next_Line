@@ -21,7 +21,7 @@ int main()
 	i = 0;
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
-	//free(line);
+	//free(line); <- causes crashes, need to figure out why with lldb
 	fd = open("testfile.txt", O_RDONLY);
 	while (i < 7)
 	{
