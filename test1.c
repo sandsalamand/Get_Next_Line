@@ -21,7 +21,7 @@ int main()
 	i = 0;
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
-	free(line);
+	//free(line);
 	fd = open("testfile.txt", O_RDONLY);
 	while (i < 7)
 	{
