@@ -19,7 +19,7 @@ LIBDIR	= libft
 
 FILLIT	= test1.c
 
-SRC = get_next_line.c \
+SRC = gnlrecursive.c \
 
 OBJ = $(SRC:.c=.o)
 

@@ -21,13 +21,13 @@ int main()
 	i = 0;
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
-	//free(line);
+	free(line);
 	fd = open("testfile.txt", O_RDONLY);
 	while (i < 7)
 	{
 		get_next_line(fd, &line);
 		ft_putendl(line);
-		//free(line); <- same situation
+		free(line);
 		i++;
 	}
 	return (0);

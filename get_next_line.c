@@ -43,7 +43,7 @@ int		check_buf(t_vars v, char **buf, int fd, char **line)
 int		get_next_line(const int fd, char **line)
 {
 	static t_vars	v = {0, 0, {}, 0};
-	char			buf[BUFF_SIZE + 1];
+	char			*buf;
 	int				output;	
 
 	*line = ft_strnew(1);
@@ -53,7 +53,6 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 	}
 	buf = ft_strnew((BUFF_SIZE * (v.line_ct + 1)) - 1);
-	putnbr_endl((BUFF_SIZE * (v.line_ct + 1)) - 1);
 	v.ctr = 0;
 	while (v.act_buf[v.cur_byte - (PREV_LINES)])
 	{

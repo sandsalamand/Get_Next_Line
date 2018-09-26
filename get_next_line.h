@@ -26,7 +26,7 @@ typedef struct		s_vars
 	int				cur_byte;
 	int				line_ct;
 	char			act_buf[BUFF_SIZE];
-//	int				ctr;
+	int				ctr;
 }					t_vars;
 
 int		get_next_line(const int fd, char **line);
