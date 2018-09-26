@@ -6,7 +6,7 @@
 #    By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 16:50:11 by sgrindhe          #+#    #+#              #
-#    Updated: 2018/09/16 02:12:58 by sgrindhe         ###   ########.fr        #
+#    Updated: 2018/09/26 02:48:07 by sgrindhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ LIBDIR	= libft
 
 FILLIT	= test1.c
 
-SRC = gnlrecursive.c \
+SRC = get_next_line.c \
 
 OBJ = $(SRC:.c=.o)
 
