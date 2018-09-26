@@ -32,12 +32,13 @@ int			get_next_line(int fd, char **line)
 	static char	buffer[BUFF_SIZE];
 	int			res;
 
+	res = -2;
 	if (cur_byte == 0 || cur_byte >= BUFF_SIZE)
 	{
 		res = read(fd, buffer, BUFF_SIZE);
 		cur_byte = 0;
 	}
-	buffer[BUFF_SIZE] = '\0';
+	buffer[BUFF_SIZE - 1] = '\0';
 	if (res == -1)
 		return (-1);
 	if (res == 0)
@@ -49,9 +50,15 @@ int			get_next_line(int fd, char **line)
 			break;
 		res++;
 	}
-	*line = strnjoin_arg2(*line, buffer, cur_byte, cur_byte + res);
+	if (res == 0)
+		res = 1;
+	*line = strnjoin_arg2(*line, buffer, cur_byte, cur_byte + res - 1);
 	cur_byte += res;
 	if (res == BUFF_SIZE)
+	{
+		read(fd, buffer, BUFF_SIZE);
+		//need to be able to get the number of lines for cur_byte to work, this whole approach is flawed
 		return (get_next_line(fd, line));
-	return (-1);
+	}
+	return (0);
 }
