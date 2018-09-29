@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/16 01:47:04 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/23 00:36:01 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/29 02:23:18 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ int main()
 	i = 0;
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
-	//free(line);
+	free(line);
 	fd = open("testfile.txt", O_RDONLY);
 	while (i < 7)
 	{
 		get_next_line(fd, &line);
 		ft_putendl(line);
-		//free(line); <- same situation
+		free(line);
 		i++;
 	}
 	return (0);

@@ -7,7 +7,6 @@ int		get_next_line(const int fd, char **line)
 	char			*buf;
 	int				cntr;
 
-	free(*line);
 	*line = ft_strnew(1);
 	if (v.cur_byte == 0)
 	{
