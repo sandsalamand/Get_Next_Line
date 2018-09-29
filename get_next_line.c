@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/29 02:43:23 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/29 03:22:54 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int		check_buf(t_vars *v, char **buf, int fd, char **line)
 			return ((*v).ctr);
 		}
 		(*v).ctr = 0;
+		return (3);
 	}
 	return (2);
 }
@@ -55,12 +56,13 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 	}
 	buf = ft_strnew(BUFF_SIZE + 1);
+	buf[BUFF_SIZE] = '\0';
 	(*v).ctr = 0;
 	while ((*v).act_buf[(*v).cur_byte - (PREV_LINES)])
 	{
-		if ((output = check_buf(v, &buf, fd, line)) != 2)
+		if ((output = check_buf(v, &buf, fd, line)) != 2 && output != 3)
 			return (output);
-		else
+		else if (output != 3)
 		{
 			(*v).ctr++;
 			(*v).cur_byte++;
