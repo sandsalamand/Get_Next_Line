@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/29 03:22:54 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/09/29 03:30:05 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ int		get_next_line(const int fd, char **line)
 			return (-1);
 	}
 	buf = ft_strnew(BUFF_SIZE + 1);
-	buf[BUFF_SIZE] = '\0';
 	(*v).ctr = 0;
 	while ((*v).act_buf[(*v).cur_byte - (PREV_LINES)])
 	{
