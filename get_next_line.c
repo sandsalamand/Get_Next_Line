@@ -50,7 +50,7 @@ int			get_next_line(const int fd, char **line)
 	*line = ft_strnew(1);
 	if ((*v).cur_byte == 0)
 	{
-		if (read(fd, &(*v).act_buf, BUFF_SIZE) < 0)
+		if (read(fd, &(*v).act_buf, BUFF_SIZE) < 0 || line == NULL || fd < 0)
 			return (-1);
 	}
 	buf = ft_strnew(BUFF_SIZE + 1);
