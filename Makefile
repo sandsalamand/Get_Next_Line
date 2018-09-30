@@ -52,6 +52,10 @@ debug:
 	rm -f $(NAME)
 	gcc $(CFLAG) -g -o $(NAME) $(FILLIT) $(SRC) -L$(LIBDIR) -lft
 
+sani:
+	rm -f $(NAME)
+	gcc $(CFLAG) -fsanitize=address -o $(NAME) $(FILLIT) $(SRC) -L$(LIBDIR) -lft
+
 .PHONY: clean fclean re
 
 
