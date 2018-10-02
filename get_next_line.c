@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/29 03:30:05 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/10/01 18:56:11 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int			get_next_line(const int fd, char **line)
 	*line = ft_strnew(1);
 	if ((*v).cur_byte == 0)
 	{
-		if (read(fd, &(*v).act_buf, BUFF_SIZE) < 0 || line == NULL || fd < 0)
+		if (read(fd, &(*v).act_buf, BUFF_SIZE) < 0 || *line == NULL | fd < 0)
 			return (-1);
 	}
 	buf = ft_strnew(BUFF_SIZE + 1);
