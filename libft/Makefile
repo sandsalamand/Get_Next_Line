@@ -6,7 +6,7 @@
 #    By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/07/09 10:37:50 by sgrindhe          #+#    #+#              #
-#    Updated: 2018/08/20 21:46:12 by sgrindhe         ###   ########.fr        #
+#    Updated: 2018/10/01 21:58:56 by sgrindhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -77,6 +77,7 @@ SRC = ft_atoi.c \
 	  ft_map_2d_int_array.c \
 	  ft_map_2d_char_array.c \
 	  putnbr_endl.c \
+	  strnclr.c \
 
 OBJ = $(SRC:.c=.o)
 

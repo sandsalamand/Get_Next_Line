@@ -1,25 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/09 10:52:40 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/10/01 21:54:13 by sgrindhe         ###   ########.fr       */
+/*   Created: 2018/09/16 01:47:04 by sgrindhe          #+#    #+#             */
+/*   Updated: 2018/10/01 20:59:57 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_strclr(char *s)
-{
-	int i;
+#include "get_next_line.h"
 
-	if (!s)
-		return ;
+int main(int argc, char **argv)
+{
+	int		i;
+	int		fd;
+	char	*line;
+
 	i = 0;
-	while (s[i] != '\0')
+	if (argc != 2)
+		return (0);
+	line = malloc(sizeof(char) * 5);
+	line[0] = 'E';
+	free(line);
+	fd = open(argv[1], O_RDONLY);
+	write(fd, "aaa", 3);
+	while (i < 7)
 	{
-		s[i] = '\0';
+		putnbr_endl(get_next_line(fd, &line));
+		ft_putendl(line);
+		free(line);
 		i++;
 	}
+	return (0);
 }
+

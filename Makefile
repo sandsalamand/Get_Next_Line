@@ -6,7 +6,7 @@
 #    By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/12 16:50:11 by sgrindhe          #+#    #+#              #
-#    Updated: 2018/09/26 02:48:07 by sgrindhe         ###   ########.fr        #
+#    Updated: 2018/10/01 21:01:02 by sgrindhe         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ NAME = gnltest
 LIBNAME = libft.a
 LIBDIR	= libft
 
-FILLIT	= test1.c
+FILLIT	= main.c
 
 SRC = get_next_line.c \
 

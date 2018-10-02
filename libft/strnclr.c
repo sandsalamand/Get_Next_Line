@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test1.c                                            :+:      :+:    :+:   */
+/*   strnclr.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/09/16 01:47:04 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/10/01 18:14:49 by sgrindhe         ###   ########.fr       */
+/*   Created: 2018/10/01 21:51:30 by sgrindhe          #+#    #+#             */
+/*   Updated: 2018/10/01 21:54:58 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
-int main()
+void	strnclr(char *ptr, int len)
 {
-	int		i;
-	int		fd;
-	char	*line;
+	int i;
 
+	if (!ptr)
+		return ;
 	i = 0;
-	line = malloc(sizeof(char) * 5);
-	line[0] = 'E';
-	free(line);
-	fd = open("testfile.txt", O_RDONLY);
-	while (i < 7)
+	while (i < len)
 	{
-		get_next_line(fd, &line);
-		ft_putendl(line);
-		free(line);
+		ptr[i] = '\0';
 		i++;
 	}
-	return (0);
 }
-

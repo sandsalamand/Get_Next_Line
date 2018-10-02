@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/12 04:20:47 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/09/17 23:09:12 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/10/01 21:55:27 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,6 @@ char				**ft_2d_char_array(unsigned int width, unsigned int height,
 					char filler);
 void				**ft_fuck_lists(t_list *lelist);
 void				putnbr_endl(int nb);
+void				strnclr(char *ptr, int len);
 
 #endif
