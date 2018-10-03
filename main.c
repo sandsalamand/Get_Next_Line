@@ -26,10 +26,12 @@ int main(int argc, char **argv)
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
 	free(line);
+	line = NULL;
 	fd = open(argv[1], O_RDONLY);
 	while (i < 7)
 	{
-		putnbr_endl(get_next_line(fd, &line));
+		//putnbr_endl(get_next_line(fd, &line));
+		get_next_line(fd, &line);
 		ft_putendl(line);
 		free(line);
 		i++;
