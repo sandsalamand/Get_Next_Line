@@ -19,13 +19,14 @@ int main(int argc, char **argv)
 	char	*line;
 
 	i = 0;
-	if (argc != 2)
+	if (argc != 2) {
+		ft_putendl("file name needed");
 		return (0);
+	}
 	line = malloc(sizeof(char) * 5);
 	line[0] = 'E';
 	free(line);
 	fd = open(argv[1], O_RDONLY);
-	write(fd, "aaa", 3);
 	while (i < 7)
 	{
 		putnbr_endl(get_next_line(fd, &line));
@@ -33,6 +34,7 @@ int main(int argc, char **argv)
 		free(line);
 		i++;
 	}
+	close(fd);
 	return (0);
 }
 

@@ -72,12 +72,12 @@ int			get_next_line(const int fd, char **line)
 
 	v = &vars;
 	*line = ft_strnew(1);
+	buf = ft_strnew(BUFF_SIZE + 1);
 	if ((*v).cur_byte == 0)
 	{
 		if ((output = e_read(v, line, &buf, fd)) <= 0)
 			return (output);
 	}
-	buf = ft_strnew(BUFF_SIZE + 1);
 	(*v).ctr = 0;
 	while ((*v).act_buf[(*v).cur_byte])
 	{
