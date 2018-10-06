@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/10/06 03:05:26 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/10/06 03:36:14 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,20 +30,20 @@ static int	e_read(t_vars *v, char **line, char **buf, int fd)
 static int	check_buf(t_vars *v, char **buf, int fd, char **line)
 {
 	(*buf)[(*v).ctr] = (*v).act_buf[(*v).cur_byte];
-	if ((*v).act_buf[(*v).cur_byte] == '\n' ||
-		(*v).act_buf[(*v).cur_byte] == '\r')
+	if ((*v).act_buf[(*v).cur_byte] == '\n')
 	{
 		(*buf)[(*v).ctr] = '\0';
 		*line = ft_strjoin(*line, *buf);
 		ft_strdel(buf);
 		(*v).cur_byte++;
-		return (((*v).act_buf[(*v).cur_byte - 1] == '\r') ? 0 : 1);
+		return (1);
 	}
 	if ((*v).cur_byte >= BUFF_SIZE - 1)
 	{
 		*line = ft_strjoin(*line, *buf);
 		strnclr(*buf, BUFF_SIZE);
 		(*v).cur_byte = 0;
+		ft_memset((*v).act_buf, '\0', 32);
 		if (((*v).ctr = e_read(v, line, buf, fd)) <= 0)
 			return ((*v).ctr);
 		(*v).ctr = 0;
