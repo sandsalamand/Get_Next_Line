@@ -23,7 +23,10 @@ static int	e_read(t_vars *v, char **line, char **buf, int fd)
 		return (-1);
 	}
 	if (output == 0)
-		return (0);
+	{
+		ft_strdel(buf);
+		return (-65);
+	}
 	return(1);
 }
 
@@ -78,5 +81,6 @@ int			get_next_line(const int fd, char **line)
 			(*v).cur_byte++;
 		}
 	}
+	ft_strdel(&buf);
 	return (0);
 }
