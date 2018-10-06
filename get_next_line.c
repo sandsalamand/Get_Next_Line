@@ -6,7 +6,7 @@
 /*   By: sgrindhe <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/09/15 23:48:23 by sgrindhe          #+#    #+#             */
-/*   Updated: 2018/10/01 21:57:17 by sgrindhe         ###   ########.fr       */
+/*   Updated: 2018/10/06 03:05:26 by sgrindhe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	e_read(t_vars *v, char **line, char **buf, int fd)
 {
 	int output;
-	int	i;
 
 	output = read(fd, &((*v).act_buf), BUFF_SIZE);
 	if (output < 0 || fd < 0 || *line == NULL)
@@ -23,32 +22,22 @@ static int	e_read(t_vars *v, char **line, char **buf, int fd)
 		ft_strdel(buf);
 		return (-1);
 	}
-	if (output < BUFF_SIZE && output > 0)
-	{
-		strnclr(*buf, BUFF_SIZE);
-		i = 0;
-		while ((*v).act_buf[i + 1])
-		{
-			(*buf)[i] = (*v).act_buf[i];
-			i++;
-		}
-		ft_strjoin(*line, *buf);
-		ft_strdel(buf);
+	if (output == 0)
 		return (0);
-	}
 	return(1);
 }
 
 static int	check_buf(t_vars *v, char **buf, int fd, char **line)
 {
 	(*buf)[(*v).ctr] = (*v).act_buf[(*v).cur_byte];
-	if ((*v).act_buf[(*v).cur_byte] == '\n')
+	if ((*v).act_buf[(*v).cur_byte] == '\n' ||
+		(*v).act_buf[(*v).cur_byte] == '\r')
 	{
 		(*buf)[(*v).ctr] = '\0';
 		*line = ft_strjoin(*line, *buf);
 		ft_strdel(buf);
 		(*v).cur_byte++;
-		return (1);
+		return (((*v).act_buf[(*v).cur_byte - 1] == '\r') ? 0 : 1);
 	}
 	if ((*v).cur_byte >= BUFF_SIZE - 1)
 	{
