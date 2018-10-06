@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 	int		fd;
 	char	*line;
 
-	i = 0;
+	i = 25;
 	if (argc != 2) {
 		ft_putendl("file name needed");
 		return (0);
@@ -28,13 +28,13 @@ int main(int argc, char **argv)
 	free(line);
 	line = NULL;
 	fd = open(argv[1], O_RDONLY);
-	while (i < 7)
+	while (i != 0)
 	{
-		putnbr_endl(get_next_line(fd, &line));
+		i = get_next_line(fd, &line);
+		putnbr_endl(i);
 		//get_next_line(fd, &line);
 		ft_putendl(line);
 		free(line);
-		i++;
 	}
 	close(fd);
 	return (0);
